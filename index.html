@@ -6,6 +6,53 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <input type="text" id="question">
+    <input type="text" id="answer">
+    <button id="btn">CLICK ME</button>
+    <div id="list"></div>
 </body>
+
+
+
+<script>
+    const questioninput = document.getElementById("q")
+    const answerinput = document.getElementById("a")
+    let card = JSON.parse(localStorage.getItem("flash"))||[];
+    document.getElementById("btn").addEventListener("click", ()=>{
+        const question = questioninput.value.trim();
+        const answer = answerinput.value.trim();
+
+        if(question === "" || answer === ""){
+            alert("Write In The Input")
+            return;
+        }
+        let hello = {
+            question,
+            answer
+        }
+        const hi = document.createElement("div")
+        hi.innerHTML = `<p>${question}</p>
+            <p>${answer}</p>
+            <p>------------------------------</p>`
+        const hh = document.getElementById("list")
+        hh.appendChild(hi)
+        card.push(hello);
+        localStorage.setItem("flash" , JSON.stringify(card));
+    })
+
+    window.addEventListener("DOMContentLoaded", ()=>{
+
+        card.forEach((question , answer) => {
+            const hi = document.createElement("div")
+        hi.innerHTML = `<p>${question}</p>
+            <p>${answer}</p>
+            <p>------------------------------</p>`
+        const hh = document.getElementById("list")
+        hh.appendChild(hi)
+        });
+    })
+
+</script>
+
+
 </html>
